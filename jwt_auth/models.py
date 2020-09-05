@@ -19,7 +19,7 @@ class User(AbstractUser):
     role = models.ForeignKey("main.UserRoles", verbose_name=_("Role"), on_delete=models.CASCADE)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'role']
 
     class Meta:
         ordering = ['-id']
