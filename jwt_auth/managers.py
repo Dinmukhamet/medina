@@ -1,5 +1,5 @@
 from django.contrib.auth.models import BaseUserManager
-
+from main.models import UserRoles
 class UserManager(BaseUserManager):
     """
     Django requires that custom users define their own Manager class. By
@@ -15,7 +15,7 @@ class UserManager(BaseUserManager):
 
         if email is None:
             raise TypeError('Users must have an email address.')
-
+        role = UserRoles.objects.get(id=role)
         user = self.model(email=self.normalize_email(email), first_name=first_name, last_name=last_name, role=role)
         user.set_password(password)
         user.save()
