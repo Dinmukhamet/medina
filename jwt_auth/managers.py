@@ -10,26 +10,26 @@ class UserManager(BaseUserManager):
     to create `User` objects.
     """
 
-    def create_user(self, email, first_name, last_name, password=None):
+    def create_user(self, email, first_name, last_name, role, password=None):
         """Create and return a `User` with an email, username and password."""
 
         if email is None:
             raise TypeError('Users must have an email address.')
 
-        user = self.model(email=self.normalize_email(email))
+        user = self.model(email=self.normalize_email(email), first_name, last_name, role)
         user.set_password(password)
         user.save()
 
         return user
 
-    def create_superuser(self, first_name, last_name, email, password):
+    def create_superuser(self, first_name, last_name, email, role, password):
         """
         Create and return a `User` with superuser (admin) permissions.
         """
         if password is None:
             raise TypeError('Superusers must have a password.')
 
-        user = self.create_user(email, first_name, last_name, password)
+        user = self.create_user(email, first_name, last_name, password, role)
         user.is_superuser = True
         user.is_staff = True
         user.save()
