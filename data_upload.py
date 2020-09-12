@@ -5,7 +5,7 @@ import string
 import datetime
 import time
 
-host = 'http://127.0.0.1:8000/'
+host = 'http://165.232.121.216/'
 headers={'Content-type':'application/json', 'Accept':'application/json'}
 project_names = [
     'Bears',
@@ -144,6 +144,7 @@ def create_user():
     }
     r = requests.post(url, json=data, headers=headers)
     print(r.status_code)
+    
     data = json.loads(r.text)
     return User(data['id'], email, pwd)
 

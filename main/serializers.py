@@ -29,8 +29,8 @@ class ImageToProjectsSerializer(serializers.ModelSerializer):
 
 class ProjectsSerializer(serializers.ModelSerializer):
     users = UserToProjectsSerializer(many=True)
-    documents = DocumentsToProjectsSerializer(many=True)
-    images = ImageToProjectsSerializer(many=True)
+    documents = DocumentsToProjectsSerializer(many=True, required=False, allow_null=True)
+    images = ImageToProjectsSerializer(many=True, required=False, allow_null=True)
 
     class Meta:
         model = Projects
