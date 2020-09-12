@@ -47,13 +47,15 @@ class ProjectsSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         users = validated_data.pop('users')
-        documents = validated_data.pop('documents')
-        images = validated_data.pop('images')
+        documents = validated_data.pop('documents', None)
+        images = validated_data.pop('images', None)
         project = Projects.objects.create(**validated_data)
         for user in users:
             u = UserToProjects.objects.create(project=project, **user)
-        for document in documents:
-            d = ProjectsDocuments.objects.create(project=project, **document)
-        for image in images:
-            i = ProjectsImages.objects.create(project=project, **image)
+        if documents is not None:
+            for document in documents:
+                d = ProjectsDocuments.objects.create(project=project, **document)
+        if images is not None:
+            for image in images:
+                i = ProjectsImages.objects.create(project=project, **image)
         return project
