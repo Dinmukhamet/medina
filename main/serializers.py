@@ -8,7 +8,9 @@ class UserToProjectsSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'user',
-            'role'
+            'user_name',
+            'role',
+            'role_name'
         ]
 
 class DocumentsToProjectsSerializer(serializers.ModelSerializer):
